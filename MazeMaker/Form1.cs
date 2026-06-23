@@ -57,17 +57,17 @@ namespace MazeMaker
                 Label thelabel = new Label();
                 thelabel.BackColor = Color.LightBlue; thelabel.BorderStyle = BorderStyle.FixedSingle;
                 thelabel.Text = $"Current: ({current.Row}, {current.Col}))";
-                //labelList.Add(thelabel);
-                RemoveWalls(current, next);
+                labelList.Add(thelabel);
+                //RemoveWalls(current, next);
                 current = next;
             }
             else if (theStack.Count > 0)
             {
                 current = theStack.Pop();
-                //labelList.RemoveAt(labelList.Count - 1); // remove the last label from the list
+                labelList.RemoveAt(labelList.Count - 1); // remove the last label from the list
 
             }
-            DisplayTheStack(labelList);
+            DisplayTheStack();
             foreach (var item in grid)
             {
                 item.Show(e.Graphics);
@@ -75,14 +75,11 @@ namespace MazeMaker
             current.Highlight(e.Graphics);
         }
 
-        private void DisplayTheStack(List<Label> labelStack)
+        private void DisplayTheStack()
         {
             flowLayoutPanel1.Controls.Clear();
-            //for (int i = labelList.Count -1; i >0 ; i--)
-            for(int i = 0; i < labelList.Count; i++ )
-            {
-                flowLayoutPanel1.Controls.Add(labelList[i]);
-            }
+            // Add the lablelist to the flow layout panel flowLayoutPanel1 
+          
         }
 
         private void tbCellWidth_Scroll(object sender, EventArgs e)

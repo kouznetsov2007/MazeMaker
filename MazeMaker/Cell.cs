@@ -95,7 +95,7 @@ namespace MazeMaker
         {
             int x = Col * Size;
             int y = Row * Size;
-            // the line below is not finished, it should highlight the current cell in a different color, for example, blue
+            // the line below is not finished, it should highlight the current cell in a different color to the purple used for the other cells
             //graphics.FillRectangle(Brushes.BlueViolet, );
         }
     }
