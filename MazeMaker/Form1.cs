@@ -58,7 +58,7 @@ namespace MazeMaker
                 thelabel.BackColor = Color.LightBlue; thelabel.BorderStyle = BorderStyle.FixedSingle;
                 thelabel.Text = $"Current: ({current.Row}, {current.Col}))";
                 labelList.Add(thelabel);
-                //RemoveWalls(current, next);
+                RemoveWalls(current, next);
                 current = next;
             }
             else if (theStack.Count > 0)
@@ -79,7 +79,10 @@ namespace MazeMaker
         {
             flowLayoutPanel1.Controls.Clear();
             // Add the lablelist to the flow layout panel flowLayoutPanel1 
-          
+            foreach (Label label in labelList)
+            {
+                flowLayoutPanel1.Controls.Add(label);
+            }
         }
 
         private void tbCellWidth_Scroll(object sender, EventArgs e)
@@ -104,14 +107,23 @@ namespace MazeMaker
                 current.walls[3] = false;
                 next.walls[1] = false;
             }
-            // missing code here
-            int y = current.Row - next.Row;
+            else if (x == -1)
+            {
+                current.walls[1] = false;
+                next.walls[3] = false;
+            }
+            
+             int y = current.Row - next.Row;
             if (y == 1)
             {
                 current.walls[0] = false;
                 next.walls[2] = false;
             }
-            // missing code here
+            else if (y == -1)
+            {
+                current.walls[2] = false;
+                next.walls[0] = false;
+            }
         }
         private void ResetMaze()
         {

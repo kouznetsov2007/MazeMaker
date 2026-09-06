@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -96,7 +97,7 @@ namespace MazeMaker
             int x = Col * Size;
             int y = Row * Size;
             // the line below is not finished, it should highlight the current cell in a different color to the purple used for the other cells
-            //graphics.FillRectangle(Brushes.BlueViolet, );
+            graphics.FillRectangle(Brushes.Cyan, x, y,  Size, Size);
         }
     }
 }
