@@ -46,7 +46,7 @@ namespace MazeMaker
 
         private void PbCanvas_Paint(object sender, PaintEventArgs e)
         {
-            current.Visited = true; 
+            current.Visited = true;
             next = current.CheckNeighbours(grid, numCols); // step 1: check for unvisited neighbours
             if (next != null) // if there is an unvisited neighbour, go to it
             {
@@ -73,14 +73,29 @@ namespace MazeMaker
                 item.Show(e.Graphics);
             }
             current.Highlight(e.Graphics);
+
+            if (theStack.Count == 0 && next == null)
+            {
+                if (cbCycle.Checked)
+                {
+                    ResetMaze();
+                }
+                else
+                {
+                    ;
+                }
+            }
         }
 
         private void DisplayTheStack()
         {
-            flowLayoutPanel1.Controls.Clear();
-            foreach (Label label in labelList)
+            if (labelList.Count > flowLayoutPanel1.Controls.Count)
             {
-                flowLayoutPanel1.Controls.Add(label);
+                flowLayoutPanel1.Controls.Add(labelList[labelList.Count - 1]);
+            }
+            else if (labelList.Count < flowLayoutPanel1.Controls.Count)
+            {
+                flowLayoutPanel1.Controls.RemoveAt(flowLayoutPanel1.Controls.Count - 1);
             }
         }
 
@@ -127,6 +142,24 @@ namespace MazeMaker
                 next.walls[0] = false;
             }
         }
+
+        private void tbSetSpeed_Scroll(object sender, EventArgs e)
+        {
+            timer.Interval = tbSetSpeed.Value;
+        }
+
+        private void cbPause_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbPause.Checked)
+            {
+                timer.Enabled = false;
+            }
+            else
+            {
+                timer.Enabled = true;
+            }
+        }
+
         private void ResetMaze()
         {
             // clear previous state
