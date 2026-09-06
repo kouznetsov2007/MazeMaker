@@ -78,7 +78,6 @@ namespace MazeMaker
         private void DisplayTheStack()
         {
             flowLayoutPanel1.Controls.Clear();
-            // Add the lablelist to the flow layout panel flowLayoutPanel1 
             foreach (Label label in labelList)
             {
                 flowLayoutPanel1.Controls.Add(label);
@@ -102,24 +101,27 @@ namespace MazeMaker
         private void RemoveWalls(Cell current, Cell next)
         {
             int x = current.Col - next.Col; // check if the next cell is to the left or right of the current cell
-            if (x == 1)
+        
+            if (x == 1) // whn moves to the left
             {
                 current.walls[3] = false;
                 next.walls[1] = false;
             }
-            else if (x == -1)
+
+            else if (x == -1) // when moves to the right
             {
                 current.walls[1] = false;
                 next.walls[3] = false;
             }
             
-             int y = current.Row - next.Row;
-            if (y == 1)
+            int y = current.Row - next.Row;
+            
+            if (y == 1) // when moves up
             {
                 current.walls[0] = false;
                 next.walls[2] = false;
             }
-            else if (y == -1)
+            else if (y == -1) // when moves down
             {
                 current.walls[2] = false;
                 next.walls[0] = false;
